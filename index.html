@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>FC온라인 게임 유튜버 - 게임마스터</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron&family=Roboto&display=swap');
+
+    body {
+      margin: 0;
+      background: #121212;
+      color: #eee;
+      font-family: 'Roboto', sans-serif;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(90deg, #0f2027, #203a43, #2c5364);
+      padding: 30px 0;
+      text-align: center;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.7);
+    }
+
+    header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2.8rem;
+      color: #00ffd5;
+      letter-spacing: 3px;
+      margin: 0;
+      text-shadow: 0 0 8px #00ffd5;
+    }
+
+    main {
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 0 20px 60px;
+    }
+
+    section {
+      background: #1c1c1c;
+      padding: 30px 40px;
+      margin-bottom: 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,255,213,0.2);
+    }
+
+    .profile {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .profile img {
+      width: 180px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px #00ffd5;
+      border: 3px solid #00ffd5;
+    }
+
+    .profile-info {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .profile-info h2 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 2rem;
+      color: #00ffd5;
+      margin-bottom: 15px;
+      text-shadow: 0 0 6px #00ffd5;
+    }
+
+    .profile-info p {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 15px;
+    }
+
+    /* 숫자 통계 박스 */
+    .stats {
+      display: flex;
+      justify-content: space-around;
+      margin-top: 30px;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      background: #222;
+      flex: 1 1 150px;
+      padding: 20px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 10px #00ffd5;
+      transition: transform 0.3s ease;
+    }
+
+    .stat-item:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px #00ffd5;
+    }
+
+    .stat-item h3 {
+      font-size: 2.5rem;
+      margin: 0;
+      color: #00ffd5;
+      font-family: 'Orbitron', sans-serif;
+      text-shadow: 0 0 5px #00ffd5;
+    }
+
+    .stat-item p {
+      margin: 10px 0 0;
+      font-size: 1.1rem;
+      color: #bbb;
+    }
+
+    /* 특징 리스트 */
+    .features h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffd5;
+      margin-bottom: 15px;
+      text-shadow: 0 0 5px #00ffd5;
+    }
+
+    .features ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    .features ul li {
+      padding: 8px 0;
+      border-bottom: 1px solid #333;
+      font-size: 1.1rem;
+      color: #ddd;
+    }
+
+    .features ul li:last-child {
+      border: none;
+    }
+
+    /* 영상 그리드 */
+    .videos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+    }
+
+    .video-card {
+      background: #222;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 0 20px rgba(0,255,213,0.3);
+      transition: transform 0.3s ease;
+    }
+
+    .video-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 30px #00ffd5;
+    }
+
+    .video-card iframe {
+      width: 100%;
+      height: 180px;
+      border: none;
+    }
+
+    .video-info {
+      padding: 15px;
+      color: #ccc;
+      font-size: 1rem;
+      text-align: center;
+      background: #1b1b1b;
+    }
+
+    /* 최근 업로드 리스트 */
+    .recent-uploads h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffd5;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #00ffd5;
+      text-align: center;
+    }
+
+    .upload-list {
+      display: flex;
+      gap: 20px;
+      overflow-x: auto;
+      padding-bottom: 10px;
+    }
+
+    .upload-item {
+      min-width: 220px;
+      background: #222;
+      border-radius: 12px;
+      box-shadow: 0 0 15px #00ffd5;
+      flex-shrink: 0;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .upload-item:hover {
+      transform: scale(1.07);
+      box-shadow: 0 0 25px #00ffd5;
+    }
+
+    .upload-thumb {
+      width: 100%;
+      height: 120px;
+      object-fit: cover;
+      border-radius: 12px 12px 0 0;
+    }
+
+    .upload-title {
+      padding: 10px;
+      color: #ccc;
+      font-size: 1rem;
+      text-align: center;
+      height: 50px;
+      overflow: hidden;
+    }
+
+    /* 팬 댓글 섹션 */
+    .fan-comments h3 {
+      font-family: 'Orbitron', sans-serif;
+      color: #00ffd5;
+      margin-bottom: 20px;
+      text-shadow: 0 0 5px #00ffd5;
+      text-align: center;
+    }
+
+    .comment-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      max-width: 800px;
+      margin: auto;
+    }
+
+    .comment {
+      background: #222;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0,255,213,0.3);
+      color: #ccc;
+      font-size: 1rem;
+      position: relative;
+    }
+
+    .comment::before {
+      content: "💬";
+      position: absolute;
+      top: -10px;
+      left: 20px;
+      font-size: 1.5rem;
+      color: #00ffd5;
+      text-shadow: 0 0 5px #00ffd5;
+    }
+
+    .comment strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #00ffd5;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px 10px;
+      background: #0a0a0a;
+      color: #555;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      margin-top: 60px;
+      border-top: 1px solid #222;
+    }
+
+    footer a {
+      color: #00ffd5;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    /* 스크롤바 꾸미기 - 최근 업로드 리스트 */
+    .upload-list::-webkit-scrollbar {
+      height: 8px;
+    }
+    .upload-list::-webkit-scrollbar-track {
+      background: #111;
+      border-radius: 8px;
+    }
+    .upload-list::-webkit-scrollbar-thumb {
+      background: #00ffd5;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>게임마스터 FC온라인 채널</h1>
+  </header>
+
+  <main>
+    <section class="profile">
+      <img src="https://i.imgur.com/2Yc3FQm.jpg" alt="게임마스터 프로필" />
+      <div class="profile-info">
+        <h2>게임마스터</h2>
+        <p>안녕하세요! FC온라인을 전문으로 하는 게임 유튜버 '게임마스터'입니다.<br />
+          경기 분석, 하이라이트, 꿀팁과 전략까지 게임을 사랑하는 모든 분들께 재미와 정보를 전해드립니다.</p>
+
+        <div class="stats">
+          <div class="stat-item">
+            <h3>58K</h3>
+            <p>구독자 수</p>
+          </div>
+          <div class="stat-item">
+            <h3>220+</h3>
+            <p>업로드 영상</p>
+          </div>
+          <div class="stat-item">
+            <h3>1.2M</h3>
+            <p>총 조회수</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features">
+      <h3>채널 특징</h3>
+      <ul>
+        <li>⚽ FC온라인 실시간 플레이 및 해설</li>
+        <li>🎮 주 4회 다양한 게임 콘텐츠 업로드</li>
+        <li>📊 심도 있는 경기 전략 분석</li>
+        <li>🕹️ 구독자와 함께하는 이벤트 및 소통</li>
+      </ul>
+    </section>
+
+    <section class="videos">
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/8gUODxj60UQ" allowfullscreen></iframe>
+        <div class="video-info">FC온라인 역대급 골 하이라이트</div>
+      </div>
+
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/bmM-mCftkKo" allowfullscreen></iframe>
+        <div class="video-info">실시간 FC온라인 경기 해설</div>
+      </div>
+
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/3C2nKJeOqRU" allowfullscreen></iframe>
+        <div class="video-info">FC온라인 공격 전략 꿀팁 공개</div>
+      </div>
+
+      <div class="video-card">
+        <iframe src="https://www.youtube.com/embed/fVyFJ3CX1nI" allowfullscreen></iframe>
+        <div class="video-info">FC온라인 구독자와 함께하는 매치</div>
+      </div>
+    </section>
+
+    <section class="recent-uploads">
+      <h3>최근 업로드</h3>
+      <div class="upload-list">
+        <div class="upload-item">
+          <img class="upload-thumb" src="https://img.youtube.com/vi/8gUODxj60UQ/hqdefault.jpg" alt="영상1 썸네일" />
+          <div class="upload-title">역대급 골 모음 - FC온라인</div>
+        </div>
+        <div class="upload-item">
+          <img class="upload-thumb" src="https://img.youtube.com/vi/bmM-mCftkKo/hqdefault.jpg" alt="영상2 썸네일" />
+          <div class="upload-title">실시간 경기 해설</div>
+        </div>
+        <div class="upload-item">
+          <img class="upload-thumb" src="https://img.youtube.com/vi/3C2nKJeOqRU/hqdefault.jpg" alt="영상3 썸네일" />
+          <div class="upload-title">공격 전략 꿀팁</div>
+        </div>
+        <div class="upload-item">
+          <img class="upload-thumb" src="https://img.youtube.com/vi/fVyFJ3CX1nI/hqdefault.jpg" alt="영상4 썸네일" />
+          <div class="upload-title">구독자와 함께 매치</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="fan-comments">
+      <h3>팬 리뷰 & 댓글</h3>
+      <div class="comment-list">
+        <div class="comment">
+          <strong>민수</strong>
+          <p>게임마스터님의 해설 덕분에 FC온라인 실력이 많이 늘었어요! 매번 감사드립니다 👍</p>
+        </div>
+        <div class="comment">
+          <strong>지현</strong>
+          <p>영상 퀄리티도 좋고 전략 설명도 이해하기 쉬워서 너무 좋아요! 앞으로도 응원할게요!</p>
+        </div>
+        <div class="comment">
+          <strong>준호</strong>
+          <p>구독자 이벤트 참여하고 좋은 추억 만들었네요! 친근한 소통 정말 최고입니다!</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    &copy; 2025 게임마스터 | <a href="https://www.youtube.com" target="_blank" rel="noopener noreferrer">유튜브 채널 방문</a>
+  </footer>
+</body>
+</html>
